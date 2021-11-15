@@ -10,10 +10,24 @@ import { environment } from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire/compat'
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { HederComponent } from './components/heder/heder.component';
+import { ChatContainerComponent } from './components/chat-container/chat-container.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { RoomListComponent } from './components/room-list/room-list.component';
+import { AddRoomComponent } from './components/add-room/add-room.component';
+import { HomeComponent } from './components/home/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HederComponent,
+    ChatContainerComponent,
+    ChatComponent,
+    RoomListComponent,
+    AddRoomComponent,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
