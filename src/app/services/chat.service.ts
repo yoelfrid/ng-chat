@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { IChatBoom } from '../models/index';
+import { IChatBoom, IMessage } from '../models/index';
 import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
@@ -23,6 +23,31 @@ export class ChatService {
           };
         });
       })
-      );
+    );
+  }
+
+  public getRoomMessages(roomId: string): Observable<Array<IMessage>> {
+    console.log("roomId ",roomId);
+    
+    return  this._db
+      .collection('rooms')
+      .doc(roomId)
+      .collection('messages')
+      .snapshotChanges()
+      .pipe(
+        map((messages) => {
+          console.log("messages ",messages.length);
+          
+          return messages.map((message) => {
+            
+            const data: IMessage = <IMessage>message.payload.doc.data();
+
+            return {
+              ...data,
+              id: message.payload.doc.id
+            }
+          })
+        })
+      )
   }
 }
