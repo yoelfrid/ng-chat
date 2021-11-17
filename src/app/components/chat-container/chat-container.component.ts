@@ -15,69 +15,75 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ChatContainerComponent implements OnInit, OnDestroy {
   private subsciption: Subscription = new Subscription();
-  private userId:string = ""
+  private userId: string = ""
+  private roomId: string = ""
 
   public rooms$: Observable<Array<IChatBoom>>;
-  public messages$: Observable<Array<IMessage>>;
+  public messages$?: Observable<Array<IMessage>>;
 
   constructor(
     private chatService: ChatService,
-    private auth:AuthService,
+    private auth: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
-  ) { 
+  ) {
 
     this.rooms$ = this.chatService.getRooms();
+    if (activatedRoute.snapshot.url.length > 1) {
+      this.roomId = activatedRoute.snapshot.url[1].path;
+      this.messages$ = this.chatService.getRoomMessages(this.roomId);
 
-    const roomId: string = activatedRoute.snapshot.url[1].path;
-
-    this.messages$ = this.chatService.getRoomMessages(roomId);
-    
-    console.log("room id ", roomId);
-    console.log("this.messages$ ",this.messages$);
+    }
 
     this.subsciption.add(
       router.events
-      .pipe(filter((data) => data instanceof NavigationEnd))
+        .pipe(filter((data) => data instanceof NavigationEnd))
         .subscribe((data) => {
           console.log(data);
-          
+
           const routeEvent: RouterEvent = <RouterEvent>data;
           const urlArr = routeEvent.url.split('/');
           if (urlArr.length >= 2) {
             this.messages$ = this.chatService.getRoomMessages(urlArr[2])
-            console.log("this.messages$ ",this.messages$);
-            
+            console.log("this.messages$ ", this.messages$);
+
           }
         })
     )
   }
 
   ngOnInit(): void {
-this.subsciption.add(
-  this.auth.getUserData().pipe(filter(data => !!data)).subscribe(user => {
-    this.userId = user.uid
-  })
-)
+    this.subsciption.add(
+      this.auth.getUserData().pipe(filter(data => !!data)).subscribe(user => {
+        this.userId = user.uid
+      })
+    )
   }
 
   ngOnDestroy() {
     this.subsciption.unsubscribe()
   }
 
-  public openAddRoomModal(){
+  public openAddRoomModal() {
     const dialogRef = this.dialog.open(AddRoomComponent, {
       width: '250px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
+      console.log('The dialog was closed', result);
       this.onAddRoom(result, this.userId)
     });
   }
-  
-  public onAddRoom(roomName:string,userId:string){
-    this.chatService.addRoom(roomName,userId)
+
+  public onAddRoom(roomName: string, userId: string) {
+    this.chatService.addRoom(roomName, userId)
+  }
+
+  public onSendMessage(message:string):void{
+    if (this.userId && this.roomId) {
+      this.chatService.sendMessage(this.userId, message,this.roomId)
+      
+    }
   }
 }
