@@ -54,6 +54,11 @@ export class AuthService {
   public isLoggedIn(): Observable<boolean> {  //פה אני מחזיר על ידי הפונקציה את המשתמש ולא את המשתמש ישרות כדי שלא יוכלו להגיע לכל המידע
     return this.isLoggetin$.asObservable()
   }
+
+  public getUserData():Observable<User>{
+    return this.userDetails$.asObservable()
+  }
+  
   private authLogin(provider: firebase.default.auth.AuthProvider) { // login
     return this.afAuth.signInWithPopup(provider).then((res) => {
       this.isLoggetin$.next(true);

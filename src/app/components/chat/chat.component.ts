@@ -8,6 +8,7 @@ import { IMessage } from 'src/app/models';
 })
 export class ChatComponent implements OnInit {
 @Input() messages:Array<IMessage> = [];
+
   constructor() { }
 
   ngOnInit(): void {
