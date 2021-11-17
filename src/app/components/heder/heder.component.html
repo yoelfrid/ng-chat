@@ -10,6 +10,7 @@
       Login</button>
   
       <ng-template #loggedIn>
+        <a class="hader__link" [routerLink]="[ '/path']"  routerLinkActive="router-link-active">Chat</a>
         <button mat-raised-button (click)="signOut()"
         >Logout</button>
       </ng-template>

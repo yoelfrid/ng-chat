@@ -1,0 +1,16 @@
+.chat {
+    &_messages {
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+    }
+    &_messages {
+        height: 5opx;
+    }
+
+    ::ng-deep {
+        cdk-virtual-scroll-viewport{
+            height: 100%;
+        }
+    }
+}
