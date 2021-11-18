@@ -60,7 +60,7 @@ export class ChatService {
   sendMessage(userId:string, body:string, roomId:string):void{
     this._db.collection('rooms').doc(roomId).collection('messages').add({
       body:body,
-      usrId:userId,
+      userId:userId,
       timestamp: new Date().getTime(),
     })
 

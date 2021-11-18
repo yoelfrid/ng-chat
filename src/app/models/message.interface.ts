@@ -1,6 +1,6 @@
 export interface IMessage{
     id:string;
-    iserId:string;
+    userId:string;
     timestamp:number;
     body:string;
 }

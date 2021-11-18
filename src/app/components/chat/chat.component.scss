@@ -4,8 +4,50 @@
         width: 100%;
         border: 1px solid black;
     }
-    &_messages {
+    &_message {
         height: 5opx;
+        background: #bdbdbd;
+        border-radius: 5px;
+        margin: 5px 0;
+        &--current-user {
+            background: #9aff9f;
+            margin-right: 30px;
+            position: relative;
+        &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 0px solid transparent;
+            border-right: 18px solid transparent;
+            border-bottom: 20px solid #9aff9f;
+            transform: rotate(90deg);
+            display: block;
+            position: absolute;
+            top: -1px;
+            right: -15px;
+
+        }
+        }
+
+        &--other-user {
+            background: grey;
+            margin-right: 30px;
+            position: relative;
+        &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 0px solid transparent;
+            border-right: 18px solid transparent;
+            border-bottom: 20px solid gray;
+            transform: rotate(90deg);
+            display: block;
+            position: absolute;
+            top: -1px;
+            right: -15px;
+
+        }
+        }
     }
 
     &_form {
