@@ -15,7 +15,7 @@
                     
                         [ngClass]="{'chat_message--current-user': userId == message.userId,
                            'chat_message--other-user': userId != message.userId}"
-                 >{{message.userId}}
+                 >{{message.body}}
 <!-- 
                  [ngClass]="{'chat_message--current-user': userId == message.userId,
                     'chat_message--other-user': userId !== message.userId}" -->

@@ -2,13 +2,18 @@
     &_messages {
         height: 323px;
         width: 100%;
-        border: 1px solid black;
+        padding: 0 4px;
+        // border: 1px solid black;
     }
     &_message {
-        height: 5opx;
-        background: #bdbdbd;
+        // height: 50px; 
+        width: 200px;
         border-radius: 5px;
         margin: 5px 0;
+        min-height: 20px;
+        padding: 10px;
+        direction: rtl;
+        // background: #bdbdbd;
         &--current-user {
             background: #9aff9f;
             margin-right: 30px;
@@ -30,7 +35,7 @@
         }
 
         &--other-user {
-            background: grey;
+            background: #c8c8c8;
             margin-right: 30px;
             position: relative;
         &:after {
@@ -39,7 +44,7 @@
             height: 0;
             border-left: 0px solid transparent;
             border-right: 18px solid transparent;
-            border-bottom: 20px solid gray;
+            border-bottom: 20px solid #c8c8c8;
             transform: rotate(90deg);
             display: block;
             position: absolute;
